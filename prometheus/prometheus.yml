@@ -4,5 +4,11 @@ scrape_configs:
     static_configs:
       - targets:
         - gobel-prometheus:9090
-        - gobel-node-exporter:9100
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets:
         - gobel-cadvisor:8090
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets:
+        - host.docker.internal:9100  # TODO: 本番環境ではipに差し替え？
