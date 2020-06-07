@@ -1,0 +1,8 @@
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+        - gobel-prometheus:9090
+        - gobel-node-exporter:9100
+        - gobel-cadvisor:8090
