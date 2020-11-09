@@ -1,0 +1,19 @@
+.DS_STORE
+.env
+
+# api
+/api/gobel-api
+
+# client
+/client/gobel-client-example
+
+# admin-client
+/admin-client/gobel-admin-client
+
+# mysql
+/mysql/data
+!/mysql/data/.gitkeep
+
+# editor
+.vscode/
+launch.json

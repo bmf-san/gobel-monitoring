@@ -1,0 +1,277 @@
+version: '3.8'
+services:
+  gobel-mysql:
+    container_name: "gobel-mysql"
+    environment: 
+      MYSQL_DATABASE: gobel
+      MYSQL_ROOT_PASSWORD: password
+    build:
+        context: "./mysql"
+        dockerfile: "Dockerfile"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - gobel_link
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-async-connect: "true"
+        fluentd-address: localhost:24224
+        tag: gobel-mysql
+    depends_on:
+      - fluentd
+  redis:
+    container_name: "gobel-redis"
+    environment: 
+      REDIS_PASSWORD: password
+    build:
+        context: "./redis"
+        dockerfile: "Dockerfile"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/var/lib/redis
+    networks:
+      - gobel_link
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-async-connect: "true"
+        fluentd-address: localhost:24224
+        tag: gobel-redis
+    depends_on:
+      - fluentd
+  redis-insight:
+    container_name: "gobel-redis-insight"
+    build:
+        context: "./redis-insight"
+        dockerfile: "Dockerfile"
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./redis-insight/data:/var/lib/redis-insight
+    networks:
+      - gobel_link
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        fluentd-async-connect: "true"
+        tag: gobel-redis-insight
+    depends_on:
+      - fluentd
+  nginx:
+    container_name: "gobel-nginx"
+    build:
+        context: "./nginx"
+        dockerfile: "Dockerfile"
+    ports:
+      - "80:80"
+    networks:
+      - gobel_link
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        fluentd-async-connect: "true"
+        tag: gobel-nginx
+    depends_on:
+      - fluentd
+  gobel-api:
+    container_name: "gobel-api"
+    environment: 
+      SERVER_PORT: 8080
+      TIME_ZONE: Asia/Tokyo
+      ALLOW_ORIGIN: "*"
+      DB_DRIVER: mysql
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_HOST: gobel-mysql
+      DB_PORT: 3306
+      DB_DATABASE: gobel
+      MYSQL_DATABASE: gobel
+      MYSQL_ROOT_PASSWORD: password
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: password
+    build:
+      context: "./gobel-api"
+      dockerfile: "Dockerfile"
+    ports:
+      - "8080:8080"
+    networks: 
+      - gobel_link
+    restart: always
+    entrypoint:
+      - dockerize
+      - -timeout
+      - 10s
+      - -wait
+      - tcp://gobel-mysql:3306
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        fluentd-async-connect: "true"
+        tag: gobel-api
+    depends_on:
+      - gobel-mysql
+      - fluentd
+  gobel-client-example:
+    container_name: "gobel-client-example"
+    environment: 
+      SERVER_PORT: 8081
+      TIME_ZONE: Asia/Tokyo
+      API_URL: http://gobel-api:8080
+      SITE_URL: http://localhost:8081
+    build:
+        context: "./gobel-client-example"
+        dockerfile: "Dockerfile"
+    ports:
+      - "8081:8081"
+    networks:
+      - gobel_link
+    entrypoint:
+      - dockerize
+      - -timeout
+      - 10s
+      - -wait
+      - tcp://gobel-mysql:3306
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        fluentd-async-connect: "true"
+        tag: gobel-client-example
+    depends_on:
+      - gobel-mysql
+      - fluentd
+  prometheus:
+    build:
+      context: "./prometheus"
+      dockerfile: "Dockerfile"
+    container_name: "gobel-prometheus"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports: 
+      - 9090:9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    networks: 
+      - gobel_link
+  node-exporter:
+    build:
+      context: "./node-exporter"
+      dockerfile: "Dockerfile"
+    container_name: "gobel-node-exporter"
+    volumes:
+      - /proc:/host/proc
+      - /sys:/host/sys
+      - /:/rootfs
+    privileged: true
+    ports:
+      - 9100:9100
+    command: 
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)
+    networks: 
+      - gobel_link
+  grafana:
+    build:
+      context: "./grafana"
+      dockerfile: "Dockerfile"
+    container_name: "gobel-grafana"
+    volumes: 
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment: 
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: password
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_USERS_ALLOW_ORG_CREATE: "false"
+      DS_PROMETHEUS: Prometheus
+    ports:
+      - 3000:3000
+    networks: 
+      - gobel_link
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: gobel-cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+    privileged: true
+    ports:
+      - 8090:8090
+    command:
+      - '-port=8090'
+    networks: 
+      - gobel_link
+  elasticsearch:  
+    build: 
+      context: "./elasticsearch"
+      dockerfile: "Dockerfile"
+    container_name: gobel-elasticsearch
+    volumes:
+      - type: bind
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/elasticsearch/data
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: password
+      discovery.type: single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks: 
+      - gobel_link
+  fluentd:
+    build:
+      context: "./fluentd"
+      dockerfile: "Dockerfile"
+    container_name: "gobel-fluentd"
+    volumes:
+      - ./fluentd/config:/fluentd/etc
+    links:
+      - "elasticsearch"
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    networks: 
+      - gobel_link
+    depends_on:
+      - elasticsearch
+  kibana:
+    build:
+      context: "./kibana"
+      dockerfile: "Dockerfile"
+    container_name: gobel-kibana
+    volumes:
+      - type: bind
+        source: ./kibana/config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
+        read_only: true
+    ports:
+      - "5601:5601"
+    networks: 
+      - gobel_link
+    depends_on:
+      - elasticsearch
+networks:
+  gobel_link:
+    external: true
+volumes:
+  elasticsearch:
