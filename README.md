@@ -10,6 +10,9 @@ This ia a production ready example.
 - [gobel-example](https://github.com/bmf-san/gobel-example)
 
 # Get started
+## Create a network
+`docker network create --driver bridge gobel_link`
+
 ## Edit environment variables and credentials
 ### docker-compose.yml
 #### gobel-mysql
@@ -23,6 +26,12 @@ environment:
 ```yml
 environment: 
     REDIS_PASSWORD: password // here
+```
+
+# nginx
+```yml
+args:
+    VUE_APP_API_ENDPOINT: "http://gobel-api.local"
 ```
 
 #### gobel-api
@@ -66,6 +75,7 @@ environment:
 `fluentd/config/fluent.conf`
 
 ```
+<!-- TODO: 後で最新に -->
 <source>
   @type forward
   port 24224
@@ -80,17 +90,29 @@ environment:
       @type elasticsearch
       host elasticsearch
       port 9200
-      user elastic // here
-      password password // here
+      user elastic
+      password password
       logstash_format true
-      logstash_prefix fluentd
+      logstash_prefix all
       logstash_dateformat %Y%m%d
       include_tag_key true
-      type_name access_log
+      type_name all_log
       tag_key @log_name
       flush_interval 1s
     </store>
 </match>
+```
+
+### kibana.yml
+`kibana/config/kibana.yml`
+
+```
+server.name: kibana
+server.host: "0"
+elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+xpack.monitoring.ui.container.elasticsearch.enabled: true
+elasticsearch.username: admin // here
+elasticsearch.password: password // here
 ```
 
 ## Docker compose
@@ -118,14 +140,14 @@ make up-d
 ```
 
 ### Go to applications
-|     Application      |                URL                 |
-| -------------------- | ---------------------------------- |
+|     Application      |                  URL                  |
+| -------------------- | ------------------------------------- |
 | gobel-api            | http://gobel-api.local/            |
-| gobel-admin-client   | http://gobel-admin-client.local/   |
+| gobel-admin-client   | http://gobel-admin-client.local/      |
 | gobel-client-example | http://gobel-client-example.local/ |
-| prometheus           | http://localhost:9090/graph        |
-| grafana              | http://localhost:3000/             |
-| kibana               | http://0.0.0.0:5601/               |
+| prometheus           | http://localhost:9090/graph           |
+| grafana              | http://localhost:3000/                |
+| kibana               | http://0.0.0.0:5601/                  |
 
 ## Kubernetes
 // TODO:

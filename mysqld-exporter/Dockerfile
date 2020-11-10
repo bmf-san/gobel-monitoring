@@ -1,0 +1,1 @@
+FROM prom/mysqld-exporter:v0.12.1
