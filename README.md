@@ -8,6 +8,7 @@ This ia a production ready example.
 - [gobel-client-example-example](https://github.com/bmf-san/gobel-client-example-example)
 - [gobel-admin-client-example](https://github.com/bmf-san/gobel-admin-client-example)
 - [gobel-example](https://github.com/bmf-san/gobel-example)
+- [gobel-ops-example](https://github.com/bmf-san/gobel-ops-example)
 
 # Get started
 ## Create a network
@@ -129,3 +130,13 @@ make up-d
 
 ## Kubernetes
 // TODO:
+
+# License
+This project is licensed under the terms of the MIT license.
+
+# Author
+bmf - Software engineer.
+
+- [github - bmf-san/bmf-san](https://github.com/bmf-san/bmf-san)
+- [twitter - @bmf-san](https://twitter.com/bmf_san)
+- [blog - bmf-tech](http://bmf-tech.com/)
