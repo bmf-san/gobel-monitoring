@@ -75,32 +75,8 @@ environment:
 `fluentd/config/fluent.conf`
 
 ```
-<!-- TODO: 後で最新に -->
-<source>
-  @type forward
-  port 24224
-  bind 0.0.0.0
-</source>
-<filter **>
-  @type stdout
-</filter>
-<match *.**>
-    @type copy
-    <store>
-      @type elasticsearch
-      host elasticsearch
-      port 9200
-      user elastic
-      password password
-      logstash_format true
-      logstash_prefix all
-      logstash_dateformat %Y%m%d
-      include_tag_key true
-      type_name all_log
-      tag_key @log_name
-      flush_interval 1s
-    </store>
-</match>
+    user elastic // here
+    password password // here
 ```
 
 ### kibana.yml
