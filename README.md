@@ -6,35 +6,39 @@ This ia a production ready example.
 # gobel
 - [gobel-api](https://github.com/bmf-san/gobel-api)
 - [gobel-client-example-example](https://github.com/bmf-san/gobel-client-example-example)
-- [gobel-admin-client-example](https://github.com/bmf-san/gobel-admin-client-example)
+- [gobel-admin-client-example-example](https://github.com/bmf-san/gobel-admin-client-example-example)
 - [gobel-example](https://github.com/bmf-san/gobel-example)
+- [gobel-ops-example](https://github.com/bmf-san/gobel-ops-example)
 
 # Get started
-## Create a network
+## Docker Compose
+Work in `./docker-compose` directory.
+
+### Create a network
 `docker network create --driver bridge gobel_link`
 
-## Edit environment variables and credentials
-### docker-compose.yml
-#### gobel-mysql
+### Edit environment variables and credentials
+#### docker-compose.yml
+##### gobel-mysql
 ```yml
 environment: 
     MYSQL_DATABASE: gobel // here
     MYSQL_ROOT_PASSWORD: password // here
 ```
 
-#### redis
+##### redis
 ```yml
 environment: 
     REDIS_PASSWORD: password // here
 ```
 
-# nginx
+##### nginx
 ```yml
 args:
     VUE_APP_API_ENDPOINT: "http://gobel-api.local"
 ```
 
-#### gobel-api
+##### gobel-api
 ```yml
 environment: 
     SERVER_PORT: 8080
@@ -53,7 +57,7 @@ environment:
     REDIS_PASSWORD: password // here
 ```
 
-#### grafana
+##### grafana
 ```yml
 environment: 
     GF_SECURITY_ADMIN_USER: admin // here
@@ -63,7 +67,7 @@ environment:
     DS_PROMETHEUS: Prometheus
 ```
 
-#### elasticsearch
+##### elasticsearch
 ```yml
 environment:
     ES_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -71,39 +75,16 @@ environment:
     discovery.type: single-node
 ```
 
-### fluent.conf
+#### Other files
+##### fluent.conf
 `fluentd/config/fluent.conf`
 
 ```
-<!-- TODO: 後で最新に -->
-<source>
-  @type forward
-  port 24224
-  bind 0.0.0.0
-</source>
-<filter **>
-  @type stdout
-</filter>
-<match *.**>
-    @type copy
-    <store>
-      @type elasticsearch
-      host elasticsearch
-      port 9200
-      user elastic
-      password password
-      logstash_format true
-      logstash_prefix all
-      logstash_dateformat %Y%m%d
-      include_tag_key true
-      type_name all_log
-      tag_key @log_name
-      flush_interval 1s
-    </store>
-</match>
+    user elastic // here
+    password password // here
 ```
 
-### kibana.yml
+##### kibana.yml
 `kibana/config/kibana.yml`
 
 ```
@@ -115,12 +96,11 @@ elasticsearch.username: admin // here
 elasticsearch.password: password // here
 ```
 
-## Docker compose
 ### Edit a /etc/hosts.
 ```
 127.0.0.1 gobel-api.local
 127.0.0.1 gobel-client-example.local
-127.0.0.1 gobel-admin-client.local
+127.0.0.1 gobel-admin-client-example.local
 ```
 
 ### Build containers
@@ -139,15 +119,36 @@ or
 make up-d
 ```
 
-### Go to applications
-|     Application      |                  URL                  |
-| -------------------- | ------------------------------------- |
-| gobel-api            | http://gobel-api.local/            |
-| gobel-admin-client   | http://gobel-admin-client.local/      |
-| gobel-client-example | http://gobel-client-example.local/ |
-| prometheus           | http://localhost:9090/graph           |
-| grafana              | http://localhost:3000/                |
-| kibana               | http://0.0.0.0:5601/                  |
+## Go to applications
+|        Application         |                   URL                    |
+| -------------------------- | ---------------------------------------- |
+| gobel-api                  | http://gobel-api.local/                  |
+| gobel-admin-client-example-example | http://gobel-admin-client-example-example.local/ |
+| gobel-client-example       | http://gobel-client-example.local/       |
+| prometheus                 | http://localhost:9090/graph              |
+| node-exporter              | http://localhost:9100/                   |
+| mysqld-exporter            | http://localhost:9104/                   |
+| grafana                    | http://localhost:3000/                   |
+| kibana                     | http://0.0.0.0:5601/                     |
 
-## Kubernetes
-// TODO:
+## Screenshots
+Heres are application screenshot examples.
+
+<!-- TODO: -->
+### gobel-api
+### gobel-admin-client-example
+### prometheus
+### node-exporter
+### mysqld-exporter
+### grafana
+### kibana
+
+# License
+This project is licensed under the terms of the MIT license.
+
+# Author
+bmf - Software engineer.
+
+- [github - bmf-san/bmf-san](https://github.com/bmf-san/bmf-san)
+- [twitter - @bmf-san](https://twitter.com/bmf_san)
+- [blog - bmf-tech](http://bmf-tech.com/)

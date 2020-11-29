@@ -1,6 +1,6 @@
-version: '3.8'
+version: '3.2'
 services:
-  gobel-mysql:
+  mysql:
     container_name: "gobel-mysql"
     environment: 
       MYSQL_DATABASE: gobel
@@ -49,7 +49,7 @@ services:
       - gobel_link
     depends_on:
       - fluentd
-  gobel-nginx:
+  nginx:
     container_name: "gobel-nginx"
     build:
         context: "./nginx"
@@ -101,16 +101,16 @@ services:
         fluentd-async-connect: "true"
         tag: "gobel.api"
     depends_on:
-      - gobel-nginx
-      - gobel-mysql
+      - nginx
+      - mysql
       - fluentd
   gobel-client-example:
     container_name: "gobel-client-example"
     environment: 
       SERVER_PORT: 81
       TIME_ZONE: Asia/Tokyo
-      API_URL: http://gobel-api:82 # NOTE: protocol://container-name:port
-      SITE_URL: http://localhost:81
+      HTTP_API_SCHEME: http
+      HTTP_API_HOST: gobel-api:82
       LOG_THRESHOLD: 1 # NOTE: 0:info 1:warn 2:error 3:fatal
       LOG_TIME_ZONE_OFFSET: 32400 # NOTE: 9*60*60
     build:
@@ -127,8 +127,8 @@ services:
         fluentd-async-connect: "true"
         tag: "gobel.clientexample"
     depends_on:
-      - gobel-nginx
-      - gobel-mysql
+      - nginx
+      - mysql
       - fluentd
   prometheus:
     build:
