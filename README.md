@@ -116,14 +116,16 @@ make up-d
 ```
 
 ### Go to applications
-|     Application      |                  URL                  |
-| -------------------- | ------------------------------------- |
+|     Application      |                URL                 |
+| -------------------- | ---------------------------------- |
 | gobel-api            | http://gobel-api.local/            |
-| gobel-admin-client   | http://gobel-admin-client.local/      |
+| gobel-admin-client   | http://gobel-admin-client.local/   |
 | gobel-client-example | http://gobel-client-example.local/ |
-| prometheus           | http://localhost:9090/graph           |
-| grafana              | http://localhost:3000/                |
-| kibana               | http://0.0.0.0:5601/                  |
+| prometheus           | http://localhost:9090/graph        |
+| node-exporter        | http://localhost:9100/             |
+| mysqld-exporter      | http://localhost:9104/             |
+| grafana              | http://localhost:3000/             |
+| kibana               | http://0.0.0.0:5601/               |
 
 ## Kubernetes
 // TODO:
