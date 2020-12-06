@@ -11,31 +11,34 @@ This ia a production ready example.
 - [gobel-ops-example](https://github.com/bmf-san/gobel-ops-example)
 
 # Get started
-## Create a network
+## Docker Compose
+Work in `./docker-compose` directory.
+
+### Create a network
 `docker network create --driver bridge gobel_link`
 
-## Edit environment variables and credentials
-### docker-compose.yml
-#### gobel-mysql
+### Edit environment variables and credentials
+#### docker-compose.yml
+##### gobel-mysql
 ```yml
 environment: 
     MYSQL_DATABASE: gobel // here
     MYSQL_ROOT_PASSWORD: password // here
 ```
 
-#### redis
+##### redis
 ```yml
 environment: 
     REDIS_PASSWORD: password // here
 ```
 
-# nginx
+##### nginx
 ```yml
 args:
     VUE_APP_API_ENDPOINT: "http://gobel-api.local"
 ```
 
-#### gobel-api
+##### gobel-api
 ```yml
 environment: 
     SERVER_PORT: 8080
@@ -54,7 +57,7 @@ environment:
     REDIS_PASSWORD: password // here
 ```
 
-#### grafana
+##### grafana
 ```yml
 environment: 
     GF_SECURITY_ADMIN_USER: admin // here
@@ -64,7 +67,7 @@ environment:
     DS_PROMETHEUS: Prometheus
 ```
 
-#### elasticsearch
+##### elasticsearch
 ```yml
 environment:
     ES_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -72,7 +75,8 @@ environment:
     discovery.type: single-node
 ```
 
-### fluent.conf
+#### Other files
+##### fluent.conf
 `fluentd/config/fluent.conf`
 
 ```
@@ -80,7 +84,7 @@ environment:
     password password // here
 ```
 
-### kibana.yml
+##### kibana.yml
 `kibana/config/kibana.yml`
 
 ```
@@ -92,7 +96,6 @@ elasticsearch.username: admin // here
 elasticsearch.password: password // here
 ```
 
-## Docker compose
 ### Edit a /etc/hosts.
 ```
 127.0.0.1 gobel-api.local
@@ -116,7 +119,12 @@ or
 make up-d
 ```
 
-### Go to applications
+## Kubernetes
+Work in `./kubernetes` directory.
+
+<!-- TODO: -->
+
+## Go to applications
 |     Application      |                URL                 |
 | -------------------- | ---------------------------------- |
 | gobel-api            | http://gobel-api.local/            |
@@ -128,8 +136,17 @@ make up-d
 | grafana              | http://localhost:3000/             |
 | kibana               | http://0.0.0.0:5601/               |
 
-## Kubernetes
-// TODO:
+## Screenshots
+Heres are application screenshot examples.
+
+<!-- TODO: -->
+### gobel-api
+### gobel-admin-client
+### prometheus
+### node-exporter
+### mysqld-exporter
+### grafana
+### kibana
 
 # License
 This project is licensed under the terms of the MIT license.

@@ -1,1 +1,0 @@
-FROM bmfsan/gobel-client-example:latest

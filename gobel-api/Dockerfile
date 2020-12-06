@@ -1,1 +1,0 @@
-FROM bmfsan/gobel-api:latest

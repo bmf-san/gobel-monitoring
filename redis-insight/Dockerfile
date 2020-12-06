@@ -1,1 +1,0 @@
-FROM redislabs/redisinsight:latest

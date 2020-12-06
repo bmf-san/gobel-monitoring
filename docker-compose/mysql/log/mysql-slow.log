@@ -1,0 +1,126 @@
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+# Time: 2020-11-23T14:55:13.224904Z
+# User@Host: root[root] @  [172.18.0.1]  Id:     9
+# Query_time: 5.001652  Lock_time: 0.000000 Rows_sent: 1  Rows_examined: 0
+use gobel;
+SET timestamp=1606143308;
+SELECT SLEEP(5);
+# Time: 2020-11-23T14:56:51.165450Z
+# User@Host: root[root] @  [172.18.0.1]  Id:     9
+# Query_time: 5.001944  Lock_time: 0.000000 Rows_sent: 1  Rows_examined: 0
+SET timestamp=1606143406;
+SELECT SLEEP(5);
+# Time: 2020-11-23T14:58:44.506278Z
+# User@Host: root[root] @  [172.18.0.1]  Id:     9
+# Query_time: 10.001113  Lock_time: 0.000000 Rows_sent: 1  Rows_examined: 0
+SET timestamp=1606143514;
+SELECT SLEEP(10);
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+# Time: 2020-11-28T08:33:18.354050Z
+# User@Host: root[root] @  [172.18.0.5]  Id:     7
+# Query_time: 1.533439  Lock_time: 0.010700 Rows_sent: 10  Rows_examined: 4445
+SET timestamp=1606552396;
+SELECT table_schema, table_name, column_name, auto_increment,
+		  pow(2, case data_type
+		    when 'tinyint'   then 7
+		    when 'smallint'  then 15
+		    when 'mediumint' then 23
+		    when 'int'       then 31
+		    when 'bigint'    then 63
+		    end+(column_type like '% unsigned'))-1 as max_int
+		  FROM information_schema.tables t
+		  JOIN information_schema.columns c USING (table_schema,table_name)
+		  WHERE c.extra = 'auto_increment' AND t.auto_increment IS NOT NULL;
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+# Time: 2020-11-28T08:39:41.372468Z
+# User@Host: root[root] @  [172.18.0.3]  Id:     8
+# Query_time: 1.093269  Lock_time: 0.001172 Rows_sent: 10  Rows_examined: 4480
+SET timestamp=1606552780;
+SELECT table_schema, table_name, column_name, auto_increment,
+		  pow(2, case data_type
+		    when 'tinyint'   then 7
+		    when 'smallint'  then 15
+		    when 'mediumint' then 23
+		    when 'int'       then 31
+		    when 'bigint'    then 63
+		    end+(column_type like '% unsigned'))-1 as max_int
+		  FROM information_schema.tables t
+		  JOIN information_schema.columns c USING (table_schema,table_name)
+		  WHERE c.extra = 'auto_increment' AND t.auto_increment IS NOT NULL;
+# Time: 2020-11-28T09:50:54.554515Z
+# User@Host: root[root] @  [172.18.0.3]  Id:    13
+# Query_time: 1.423308  Lock_time: 0.000000 Rows_sent: 0  Rows_examined: 0
+SET timestamp=1606557053;
+SHOW BINARY LOGS;
+# Time: 2020-11-28T09:50:57.142218Z
+# User@Host: root[root] @  [172.18.0.3]  Id:    13
+# Query_time: 1.286688  Lock_time: 0.004553 Rows_sent: 10  Rows_examined: 4480
+SET timestamp=1606557055;
+SELECT table_schema, table_name, column_name, auto_increment,
+		  pow(2, case data_type
+		    when 'tinyint'   then 7
+		    when 'smallint'  then 15
+		    when 'mediumint' then 23
+		    when 'int'       then 31
+		    when 'bigint'    then 63
+		    end+(column_type like '% unsigned'))-1 as max_int
+		  FROM information_schema.tables t
+		  JOIN information_schema.columns c USING (table_schema,table_name)
+		  WHERE c.extra = 'auto_increment' AND t.auto_increment IS NOT NULL;
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+/usr/sbin/mysqld, Version: 8.0.17 (MySQL Community Server - GPL). started with:
+Tcp port: 0  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
