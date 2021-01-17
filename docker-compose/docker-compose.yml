@@ -109,8 +109,8 @@ services:
     environment: 
       SERVER_PORT: 81
       TIME_ZONE: Asia/Tokyo
-      API_URL: http://gobel-api:82 # NOTE: protocol://container-name:port
-      SITE_URL: http://localhost:81
+      HTTP_API_SCHEME: http
+      HTTP_API_HOST: gobel-api:82
       LOG_THRESHOLD: 1 # NOTE: 0:info 1:warn 2:error 3:fatal
       LOG_TIME_ZONE_OFFSET: 32400 # NOTE: 9*60*60
     build:
