@@ -6,7 +6,7 @@ This ia a production ready example.
 # gobel
 - [gobel-api](https://github.com/bmf-san/gobel-api)
 - [gobel-client-example-example](https://github.com/bmf-san/gobel-client-example-example)
-- [gobel-admin-client-example](https://github.com/bmf-san/gobel-admin-client-example)
+- [gobel-admin-client-example-example](https://github.com/bmf-san/gobel-admin-client-example-example)
 - [gobel-example](https://github.com/bmf-san/gobel-example)
 - [gobel-ops-example](https://github.com/bmf-san/gobel-ops-example)
 
@@ -100,7 +100,7 @@ elasticsearch.password: password // here
 ```
 127.0.0.1 gobel-api.local
 127.0.0.1 gobel-client-example.local
-127.0.0.1 gobel-admin-client.local
+127.0.0.1 gobel-admin-client-example.local
 ```
 
 ### Build containers
@@ -128,7 +128,7 @@ Work in `./kubernetes` directory.
 |        Application         |                   URL                    |
 | -------------------------- | ---------------------------------------- |
 | gobel-api                  | http://gobel-api.local/                  |
-| gobel-admin-client-example | http://gobel-admin-client-example.local/ |
+| gobel-admin-client-example-example | http://gobel-admin-client-example-example.local/ |
 | gobel-client-example       | http://gobel-client-example.local/       |
 | prometheus                 | http://localhost:9090/graph              |
 | node-exporter              | http://localhost:9100/                   |
@@ -141,7 +141,7 @@ Heres are application screenshot examples.
 
 <!-- TODO: -->
 ### gobel-api
-### gobel-admin-client
+### gobel-admin-client-example
 ### prometheus
 ### node-exporter
 ### mysqld-exporter
