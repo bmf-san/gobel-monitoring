@@ -125,16 +125,16 @@ Work in `./kubernetes` directory.
 <!-- TODO: -->
 
 ## Go to applications
-|     Application      |                URL                 |
-| -------------------- | ---------------------------------- |
-| gobel-api            | http://gobel-api.local/            |
-| gobel-admin-client   | http://gobel-admin-client.local/   |
-| gobel-client-example | http://gobel-client-example.local/ |
-| prometheus           | http://localhost:9090/graph        |
-| node-exporter        | http://localhost:9100/             |
-| mysqld-exporter      | http://localhost:9104/             |
-| grafana              | http://localhost:3000/             |
-| kibana               | http://0.0.0.0:5601/               |
+|        Application         |                   URL                    |
+| -------------------------- | ---------------------------------------- |
+| gobel-api                  | http://gobel-api.local/                  |
+| gobel-admin-client-example | http://gobel-admin-client-example.local/ |
+| gobel-client-example       | http://gobel-client-example.local/       |
+| prometheus                 | http://localhost:9090/graph              |
+| node-exporter              | http://localhost:9100/                   |
+| mysqld-exporter            | http://localhost:9104/                   |
+| grafana                    | http://localhost:3000/                   |
+| kibana                     | http://0.0.0.0:5601/                     |
 
 ## Screenshots
 Heres are application screenshot examples.

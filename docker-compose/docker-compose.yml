@@ -102,7 +102,7 @@ services:
         tag: "gobel.api"
     depends_on:
       - nginx
-      - gobel-mysql
+      - mysql
       - fluentd
   gobel-client-example:
     container_name: "gobel-client-example"
@@ -128,7 +128,7 @@ services:
         tag: "gobel.clientexample"
     depends_on:
       - nginx
-      - gobel-mysql
+      - mysql
       - fluentd
   prometheus:
     build:
