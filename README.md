@@ -119,11 +119,6 @@ or
 make up-d
 ```
 
-## Kubernetes
-Work in `./kubernetes` directory.
-
-<!-- TODO: -->
-
 ## Go to applications
 |        Application         |                   URL                    |
 | -------------------------- | ---------------------------------------- |
