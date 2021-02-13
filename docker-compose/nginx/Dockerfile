@@ -1,4 +1,4 @@
-FROM bmfsan/gobel-admin-client:latest as build-stage
+FROM bmfsan/gobel-admin-client-example:latest as build-stage
 
 ARG VUE_APP_API_ENDPOINT
 ENV VUE_APP_API_ENDPOINT=${VUE_APP_API_ENDPOINT}
