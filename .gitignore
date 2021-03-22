@@ -1,5 +1,8 @@
 .DS_STORE
 
+# env file
+.env
+
 # docker-compose
 docker-compose/mysql/data
 !docker-compose/mysql/data/.gitkeep
