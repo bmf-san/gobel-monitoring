@@ -136,7 +136,7 @@ Visualization of logs in cooperation with elasticsearch and fluentd.
   - nginx-access-*
   - nginx-error-*
 
-<img src="https://user-images.githubusercontent.com/13291041/121389862-c8b4eb80-c987-11eb-9be9-2752c13b9218.png" alt="drawing" width="400"/>
+<img src="https://user-images.githubusercontent.com/13291041/121403338-c22d7080-c995-11eb-82b7-b9470a0f192a.png" alt="drawing" width="400"/>
 
 # License
 This project is licensed under the terms of the MIT license.
