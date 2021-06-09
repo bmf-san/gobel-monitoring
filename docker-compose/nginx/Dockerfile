@@ -7,7 +7,7 @@ RUN npm run prod-build
 
 FROM nginx:1.19.0-alpine
 
-COPY --from=build-stage ./app/dist ./var/www/html
+COPY --from=build-stage ./go/gobel-admin-client-example/app/dist ./var/www/html
 COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./conf.d/ /etc/nginx/conf.d
 

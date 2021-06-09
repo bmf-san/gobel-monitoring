@@ -2,9 +2,7 @@ version: '3.2'
 services:
   mysql:
     container_name: "gobel-mysql"
-    environment: 
-      MYSQL_DATABASE: gobel
-      MYSQL_ROOT_PASSWORD: password
+    env_file: ./mysql/.env
     build:
         context: "./mysql"
         dockerfile: "Dockerfile"
@@ -23,8 +21,7 @@ services:
       - fluentd
   redis:
     container_name: "gobel-redis"
-    environment: 
-      REDIS_PASSWORD: password
+    env_file: ./redis/.env
     build:
         context: "./redis"
         dockerfile: "Dockerfile"
@@ -70,23 +67,7 @@ services:
       - fluentd
   gobel-api:
     container_name: "gobel-api"
-    environment: 
-      SERVER_PORT: 82
-      TIME_ZONE: Asia/Tokyo
-      ALLOW_ORIGIN: '*'
-      DB_DRIVER: mysql
-      DB_USER: root
-      DB_PASSWORD: password
-      DB_HOST: gobel-mysql
-      DB_PORT: 3306
-      DB_DATABASE: gobel
-      MYSQL_DATABASE: gobel
-      MYSQL_ROOT_PASSWORD: password
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      REDIS_PASSWORD: password
-      LOG_THRESHOLD: 1 # NOTE: 0:info 1:warn 2:error 3:fatal
-      LOG_TIME_ZONE_OFFSET: 32400 # NOTE: 9*60*60
+    env_file: ./gobel-api/.env
     build:
       context: "./gobel-api"
       dockerfile: "Dockerfile"
@@ -106,13 +87,7 @@ services:
       - fluentd
   gobel-client-example:
     container_name: "gobel-client-example"
-    environment: 
-      SERVER_PORT: 81
-      TIME_ZONE: Asia/Tokyo
-      HTTP_API_SCHEME: http
-      HTTP_API_HOST: gobel-api:82
-      LOG_THRESHOLD: 1 # NOTE: 0:info 1:warn 2:error 3:fatal
-      LOG_TIME_ZONE_OFFSET: 32400 # NOTE: 9*60*60
+    env_file: ./gobel-client-example/.env
     build:
         context: "./gobel-client-example"
         dockerfile: "Dockerfile"
@@ -165,8 +140,7 @@ services:
       context: "./mysqld-exporter"
       dockerfile: "Dockerfile"
     container_name: "gobel-mysqld-exporter"
-    environment:
-      - DATA_SOURCE_NAME=root:password@(localhost:3306)/
+    env_file: ./mysqld-exporter/.env
     ports:
       - 9104:9104
     command: 
@@ -194,12 +168,7 @@ services:
     container_name: "gobel-grafana"
     volumes: 
       - ./grafana/provisioning:/etc/grafana/provisioning
-    environment: 
-      GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: password
-      GF_USERS_ALLOW_SIGN_UP: "false"
-      GF_USERS_ALLOW_ORG_CREATE: "false"
-      DS_PROMETHEUS: Prometheus
+    env_file: ./grafana/.env
     ports:
       - 3000:3000
     networks: 
@@ -232,10 +201,7 @@ services:
       - type: volume
         source: elasticsearch
         target: /usr/share/elasticsearch/data
-    environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-      ELASTIC_PASSWORD: password
-      discovery.type: single-node
+    env_file: ./elasticsearch/.env
     ports:
       - "9200:9200"
       - "9300:9300"

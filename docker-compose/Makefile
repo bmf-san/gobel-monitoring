@@ -5,13 +5,13 @@ help:
 .DEFAULT_GOAL := help
 
 .PHONY: Build containers
-build: ## Build containers by docker-compose.
+docker-compose-build: ## Build containers by docker compose.
 	docker-compose -f docker-compose.yml build
 
 .PHONY: Run containers
-up: ## Run containers by docker-compose.
+docker-compose-up: ## Run containers by docker-compose.
 	docker-compose -f docker-compose.yml up
 
 .PHONY: Run containers in the background
-up-d: ## Run containers in the background by docker-compose.
+docker-compose-up-d: ## Run containers in the background by docker-compose.
 	docker-compose -f docker-compose.yml up -d

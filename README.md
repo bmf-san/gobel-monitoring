@@ -1,7 +1,9 @@
 # gobel-example
 Gobel is a headless cms built with golang. 
 
-This ia a production ready example.
+This repository contains the code to run gobel in each environment.
+
+Both local environment and production environment are assumed to be operated with docker-compose.
 
 # gobel
 - [gobel-api](https://github.com/bmf-san/gobel-api)
@@ -17,65 +19,11 @@ Work in `./docker-compose` directory.
 ### Create a network
 `docker network create --driver bridge gobel_link`
 
-### Edit environment variables and credentials
-#### docker-compose.yml
-##### gobel-mysql
-```yml
-environment: 
-    MYSQL_DATABASE: gobel // here
-    MYSQL_ROOT_PASSWORD: password // here
-```
+### Edit files
+#### environtment files
+Copy each .env_example under the following directory and edit it as needed.
 
-##### redis
-```yml
-environment: 
-    REDIS_PASSWORD: password // here
-```
-
-##### nginx
-```yml
-args:
-    VUE_APP_API_ENDPOINT: "http://gobel-api.local"
-```
-
-##### gobel-api
-```yml
-environment: 
-    SERVER_PORT: 8080
-    TIME_ZONE: Asia/Tokyo
-    ALLOW_ORIGIN: "*"
-    DB_DRIVER: mysql
-    DB_USER: root // here
-    DB_PASSWORD: password // here
-    DB_HOST: gobel-mysql
-    DB_PORT: 3306
-    DB_DATABASE: gobel // here
-    MYSQL_DATABASE: gobel // here
-    MYSQL_ROOT_PASSWORD: password // here
-    REDIS_HOST: redis
-    REDIS_PORT: 6379
-    REDIS_PASSWORD: password // here
-```
-
-##### grafana
-```yml
-environment: 
-    GF_SECURITY_ADMIN_USER: admin // here
-    GF_SECURITY_ADMIN_PASSWORD: password // here
-    GF_USERS_ALLOW_SIGN_UP: "false"
-    GF_USERS_ALLOW_ORG_CREATE: "false"
-    DS_PROMETHEUS: Prometheus
-```
-
-##### elasticsearch
-```yml
-environment:
-    ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-    ELASTIC_PASSWORD: password // here
-    discovery.type: single-node
-```
-
-#### Other files
+#### config files
 ##### fluent.conf
 `fluentd/config/fluent.conf`
 
@@ -105,43 +53,31 @@ elasticsearch.password: password // here
 
 ### Build containers
 ```
-make build
+make docker-compose-build
 ```
 
 ### Run containers
 ```
-make up
+make docker-compose-up
 ```
 
 or
 
 ```
-make up-d
+make docker-compose-up-d
 ```
 
 ## Go to applications
-|        Application         |                   URL                    |
-| -------------------------- | ---------------------------------------- |
-| gobel-api                  | http://gobel-api.local/                  |
-| gobel-admin-client-example-example | http://gobel-admin-client-example-example.local/ |
-| gobel-client-example       | http://gobel-client-example.local/       |
-| prometheus                 | http://localhost:9090/graph              |
-| node-exporter              | http://localhost:9100/                   |
-| mysqld-exporter            | http://localhost:9104/                   |
-| grafana                    | http://localhost:3000/                   |
-| kibana                     | http://0.0.0.0:5601/                     |
-
-## Screenshots
-Heres are application screenshot examples.
-
-<!-- TODO: -->
-### gobel-api
-### gobel-admin-client-example
-### prometheus
-### node-exporter
-### mysqld-exporter
-### grafana
-### kibana
+|            Application             |                   URL                    |
+| ---------------------------------- | ---------------------------------------- |
+| gobel-api                          | http://gobel-api.local/                  |
+| gobel-admin-client-example-example | http://gobel-admin-client-example.local/ |
+| gobel-client-example               | http://gobel-client-example.local/       |
+| prometheus                         | http://localhost:9090/graph              |
+| node-exporter                      | http://localhost:9100/                   |
+| mysqld-exporter                    | http://localhost:9104/                   |
+| grafana                            | http://localhost:3000/                   |
+| kibana                             | http://0.0.0.0:5601/                     |
 
 # License
 This project is licensed under the terms of the MIT license.
