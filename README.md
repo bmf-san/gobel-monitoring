@@ -79,6 +79,65 @@ make docker-compose-up-d
 | grafana                            | http://localhost:3000/                   |
 | kibana                             | http://0.0.0.0:5601/                     |
 
+# UI screenshots
+## gobel-client-example
+An example application using gobel-api.
+
+<img src="https://user-images.githubusercontent.com/13291041/121388155-33652780-c986-11eb-9076-985b7113b0a9.png" alt="drawing" width="400"/>
+
+## gobel-admin-client-example
+An example application using gobel-api for admin.
+
+<img src="https://user-images.githubusercontent.com/13291041/121388150-32cc9100-c986-11eb-86d5-2782bdb6193b.png" alt="drawing" width="400"/>
+
+## Grafana
+A dashboard for monitoring various logs in cooperation with prometheus using cAdvisor, mysqld-exporter and node-exporter.
+
+### Container monitoring
+Monitor the resource usage and performance characteristics of running containers.
+
+<img src="https://user-images.githubusercontent.com/13291041/121389800-b8047580-c987-11eb-9814-291498c74bd7.png" alt="drawing" width="400"/>
+
+### MySQL Overview
+Monitor the MySQL server metrics.
+
+<img src="https://user-images.githubusercontent.com/13291041/121390045-f5690300-c987-11eb-8a1c-d3b4f278e23c.png" alt="drawing" width="400"/>
+
+### Node Exporter Full
+Monitor system metrics provided by node exporter.
+
+<img src="https://user-images.githubusercontent.com/13291041/121389862-c8b4eb80-c987-11eb-9be9-2752c13b9218.png" alt="drawing" width="400"/>
+
+## Prometheus
+Prometheus is an open-source systems monitoring and alerting toolkit.
+Poll the exporter to collect resources and manage data.
+
+<img src="https://user-images.githubusercontent.com/13291041/121389083-0402ea80-c987-11eb-98a5-50908aa36372.png" alt="drawing" width="400"/>
+
+## Node exporter
+Node exporter collects system metrics.
+
+<img src="https://user-images.githubusercontent.com/13291041/121389071-006f6380-c987-11eb-85bc-14f0e96b2cbc.png" alt="drawing" width="400"/>
+
+## MySQL exporter
+MySQL exporter collects MySQL server metrics.
+
+<img src="https://user-images.githubusercontent.com/13291041/121389074-01a09080-c987-11eb-968e-dc7ae9d3c29c.png" alt="drawing" width="400"/>
+
+## Kibana
+Visualization of logs in cooperation with elasticsearch and fluentd.
+
+- Application log
+  - gobel-api-*
+  - gobel-clientexample-*
+- DB log
+  - mysql-slow-*
+- Web server log
+  - nginx-access-*
+  - nginx-error-*
+
+<img src="https://user-images.githubusercontent.com/13291041/121389862-c8b4eb80-c987-11eb-9be9-2752c13b9218.png" alt="drawing" width="400"/>
+
 # License
 This project is licensed under the terms of the MIT license.
 
