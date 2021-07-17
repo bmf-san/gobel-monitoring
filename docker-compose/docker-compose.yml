@@ -17,6 +17,7 @@ services:
       - seccomp:unconfined
     networks:
       - gobel_link
+    restart: always
     depends_on:
       - fluentd
   redis:
@@ -31,6 +32,7 @@ services:
       - ./redis/data:/var/lib/redis
     networks:
       - gobel_link
+    restart: always
     depends_on:
       - fluentd
   redis-insight:
@@ -44,6 +46,7 @@ services:
       - ./redis-insight/data:/var/lib/redis-insight
     networks:
       - gobel_link
+    restart: always
     depends_on:
       - fluentd
   nginx:
@@ -57,6 +60,7 @@ services:
       - "80:80"
     networks:
       - gobel_link
+    restart: always
     logging:
       driver: "fluentd"
       options:
@@ -75,6 +79,7 @@ services:
       - "82:82"
     networks: 
       - gobel_link
+    restart: always
     logging:
       driver: "fluentd"
       options:
@@ -95,6 +100,7 @@ services:
       - "81:81"
     networks:
       - gobel_link
+    restart: always
     logging:
       driver: "fluentd"
       options:
@@ -118,6 +124,7 @@ services:
       - --config.file=/etc/prometheus/prometheus.yml
     networks: 
       - gobel_link
+    restart: always
   node-exporter:
     build:
       context: "./node-exporter"
@@ -135,6 +142,7 @@ services:
       - --collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)
     networks: 
       - gobel_link
+    restart: always
   mysqld-exporter:
     build:
       context: "./mysqld-exporter"
@@ -161,6 +169,7 @@ services:
       - --collect.perf_schema.eventswaits
     networks: 
       - gobel_link
+    restart: always
   grafana:
     build:
       context: "./grafana"
@@ -173,6 +182,7 @@ services:
       - 3000:3000
     networks: 
       - gobel_link
+    restart: always
   cadvisor:
     image: google/cadvisor:latest
     container_name: gobel-cadvisor
@@ -188,6 +198,7 @@ services:
       - '-port=8090'
     networks: 
       - gobel_link
+    restart: always
   elasticsearch:  
     build: 
       context: "./elasticsearch"
@@ -207,6 +218,7 @@ services:
       - "9300:9300"
     networks: 
       - gobel_link
+    restart: always
   fluentd:
     build:
       context: "./fluentd"
@@ -222,6 +234,7 @@ services:
       - "24224:24224/udp"
     networks: 
       - gobel_link
+    restart: always
     depends_on:
       - elasticsearch
   kibana:
@@ -238,6 +251,7 @@ services:
       - "5601:5601"
     networks: 
       - gobel_link
+    restart: always
     depends_on:
       - elasticsearch
 networks:

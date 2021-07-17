@@ -6,12 +6,8 @@ help:
 
 .PHONY: Build containers
 docker-compose-build: ## Build containers by docker compose.
-	docker-compose -f docker-compose.yml build
+	docker-compose build
 
 .PHONY: Run containers
 docker-compose-up: ## Run containers by docker-compose.
-	docker-compose -f docker-compose.yml up
-
-.PHONY: Run containers in the background
-docker-compose-up-d: ## Run containers in the background by docker-compose.
-	docker-compose -f docker-compose.yml up -d
+	docker-compose up --no-deps -d
