@@ -4,16 +4,16 @@
 .env
 
 # docker-compose
-docker-compose/mysql/data
-!docker-compose/mysql/data/.gitkeep
-docker-compose/mysql/log
-!docker-compose/mysql/log/.gitkeep
+mysql/data
+!/mysql/data/.gitkeep
+mysql/log
+!/mysql/log/.gitkeep
 
-docker-compose/redis/data
-!docker-compose/redis/data/.gitkeep
+redis/data
+!/redis/data/.gitkeep
 
-docker-compose/redis-insight/data
-!docker-compose/redis-insight/data/.gitkeep
+redis-insight/data
+!redis-insight/data/.gitkeep
 
 # editor
 .vscode/
