@@ -8,6 +8,7 @@ DEPLOY_DOCKER_MACHINE="go-production-boilerplate"
 build=docker-compose build
 up=docker-compose up --no-deps -d
 
+// TODO: local prodでコマンドを分ける
 .PHONY: Build containers
 docker-compose-build: ## Build containers by docker compose.
 	@$(build)
