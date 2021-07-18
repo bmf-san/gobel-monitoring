@@ -12,6 +12,15 @@ Both local environment and production environment are assumed to be operated wit
 - [gobel-example](https://github.com/bmf-san/gobel-example)
 - [gobel-ops-example](https://github.com/bmf-san/gobel-ops-example)
 
+# Why use docker compose in production?
+// TODO:
+
+# Tips for running docker compose in production
+// TODO:
+
+# To run or not to run a database on docker
+// TODO:
+
 # Get started
 ## Docker Compose
 Work in `./docker-compose` directory.
@@ -78,6 +87,9 @@ make docker-compose-up-d
 | mysqld-exporter                    | http://localhost:9104/                   |
 | grafana                            | http://localhost:3000/                   |
 | kibana                             | http://0.0.0.0:5601/                     |
+
+# Deploy
+// TODO: makeでやりたい
 
 # UI screenshots
 ## gobel-client-example
